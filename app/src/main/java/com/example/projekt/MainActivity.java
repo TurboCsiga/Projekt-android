@@ -12,6 +12,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
@@ -24,6 +27,7 @@ import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.projekt.databinding.ActivityMainBinding;
 import com.example.projekt.databinding.ItemsListItemBinding;
 import com.google.android.material.navigation.NavigationView;
@@ -31,6 +35,7 @@ import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -58,16 +63,13 @@ public class MainActivity extends AppCompatActivity {
         navigationView = binding.navigationView;
         frameLayout = binding.fragmentContainer;
 
+
         RequestTask task = new RequestTask();
         task.execute();
 
         setSupportActionBar(toolbar);
-
-        //Toggle lesz a hamburger ikon
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
                 drawerLayout, toolbar, R.string.open, R.string.close);
-
-        //Layouthoz hozzáadás és elindítása
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -89,7 +91,6 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(registerIntent);
                     finish();
                     break;
-
             }
 
             drawerLayout.closeDrawer(GravityCompat.START);
@@ -108,10 +109,12 @@ public class MainActivity extends AppCompatActivity {
             ItemsListItemBinding listItemBinding = ItemsListItemBinding.inflate(getLayoutInflater());
             Item actual = items.get(position);
             listItemBinding.name.setText(actual.getName());
-            listItemBinding.price.setText(String.format(" (%d)", actual.getPrice()));
+            listItemBinding.price.setText(String.format(" %d", actual.getPrice()));
+            listItemBinding.imgView.setImageURI(Uri.parse(String.format(" %d", actual.getImage())));
             return listItemBinding.getRoot().getRootView();
         }
     }
+
 
     private class RequestTask  extends AsyncTask<Void, Void, Response> {
 
@@ -141,5 +144,7 @@ public class MainActivity extends AppCompatActivity {
             items.clear();
             items.addAll(Arrays.asList(itemArray));
         }
+
+
     }
 }

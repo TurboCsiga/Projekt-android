@@ -26,11 +26,13 @@ public class ProfileActivity extends AppCompatActivity {
     private ActivityProfileBinding binding;
     private List<User> users = new ArrayList<>();
     private SharedPreferences prefs;
+    private SharedPreferences sharedPreferences;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityProfileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        sharedPreferences = ProfileActivity.this.getSharedPreferences("preferences", Context.MODE_PRIVATE);
         RequestTask task = new RequestTask();
         task.execute();
         RequestTask2 task2 = new RequestTask2();
@@ -98,6 +100,20 @@ public class ProfileActivity extends AppCompatActivity {
                 Log.d("Hiba", e.toString());
             }
             return response;
+        }
+
+        @Override
+        protected void onPostExecute(Response response) {
+            super.onPostExecute(response);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.remove("token");
+            editor.apply();
+            binding.usernameTextView.setText(" ");
+            binding.emailTextView.setText(" ");
+            binding.gunauthorizedTextView.setText(" ");
+            Intent backToMainIntent = new Intent(ProfileActivity.this, MainActivity.class);
+            startActivity(backToMainIntent);
+            finish();
         }
     }
 

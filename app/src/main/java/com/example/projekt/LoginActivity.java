@@ -36,9 +36,6 @@ public class LoginActivity extends AppCompatActivity {
 
         sharedPreferences = LoginActivity.this.getSharedPreferences("preferences", Context.MODE_PRIVATE);
         init();
-        Intent loginBackMainIntent = new Intent(LoginActivity.this, MainActivity.class);
-        startActivity(loginBackMainIntent);
-        finish();
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override

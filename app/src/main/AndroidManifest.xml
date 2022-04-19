@@ -7,12 +7,15 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/snglogo_background"
         android:label="Socks N Guns"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/snglogo"
         android:supportsRtl="true"
         android:theme="@style/Theme.Projekt"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".CartActivity"
+            android:exported="true" />
         <activity
             android:name=".ProfileActivity"
             android:exported="true" />

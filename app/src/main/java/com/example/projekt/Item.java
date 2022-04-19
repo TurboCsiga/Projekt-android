@@ -1,5 +1,6 @@
 package com.example.projekt;
 
+import java.net.URL;
 import java.util.List;
 
 public class Item {
@@ -7,12 +8,14 @@ public class Item {
     private String name;
     private int price;
     private int quantity;
+    private URL image;
 
-    public Item(int id, String name, int price, int quantity) {
+    public Item(int id, String name, int price, int quantity, URL image) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.quantity = quantity;
+        this.image = image;
     }
 
     public int getId() {
@@ -31,7 +34,6 @@ public class Item {
         this.name = name;
     }
 
-
     public int getPrice() {
         return price;
     }
@@ -46,5 +48,13 @@ public class Item {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public URL getImage() {
+        return image;
+    }
+
+    public void setImage(URL image) {
+        this.image = image;
     }
 }

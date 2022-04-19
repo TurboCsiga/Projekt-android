@@ -17,5 +17,9 @@
         <item
             android:id="@+id/profilePage"
             android:title="Profile"/>
+
+        <item
+            android:id="@+id/cartPage"
+            android:title="Cart"/>
     </group>
 </menu>
