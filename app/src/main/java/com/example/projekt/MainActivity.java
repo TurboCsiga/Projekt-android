@@ -29,7 +29,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.example.projekt.databinding.ActivityMainBinding;
 import com.example.projekt.databinding.ItemsListItemBinding;
 import com.google.android.material.navigation.NavigationView;
