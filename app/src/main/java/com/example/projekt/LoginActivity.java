@@ -52,10 +52,10 @@ public class LoginActivity extends AppCompatActivity {
                 email = editTextEmail.getText().toString().trim();
                 password = editTextPassword.getText().toString();
                 if(email.isEmpty()) {
-                    Toast.makeText(LoginActivity.this, "Az email nem lehet üres", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Email cannot be empty", Toast.LENGTH_SHORT).show();
                 }
                 else if(password.isEmpty() || password.length() < 8) {
-                    Toast.makeText(LoginActivity.this, "A jelszó minimum 8 karakterből állhat!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "The password must be at least 8 characters long", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     new LoginTask().execute();
@@ -91,13 +91,13 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(Response response) {
             super.onPostExecute(response);
             if (response == null){
-                Toast.makeText(LoginActivity.this, "Hiba történt a bejelentkezés során", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "An error occurred while logging in", Toast.LENGTH_SHORT).show();
             }
             else if (response.getResponseCode() >= 400) {
                 Toast.makeText(LoginActivity.this, response.getContent(), Toast.LENGTH_SHORT).show();
             }
             else {
-                Toast.makeText(LoginActivity.this, "Sikeres bejelentkezés!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
                 try {
                     Gson gson = new Gson();
                     UserResponse userResponse = gson.fromJson(response.getContent(), UserResponse.class);

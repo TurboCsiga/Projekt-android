@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected Response doInBackground(Void... voids) {
             Response response = null;
-            String data = String.format("[\"{\"item_id\":\"%s\",\"quantity\":\"%s\"}\"]", actual.getIdAsString(), "1");
+            String data = String.format("[{\"item_id\":\"%s\",\"quantity\":\"%s\"}]", actual.getIdAsString(), "1");
             Log.e("OrderRequest", "doInBackground: " + data );
             try {
                 response = RequestHandler.postWithAuth(
