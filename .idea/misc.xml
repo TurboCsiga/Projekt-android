@@ -5,7 +5,11 @@
       <map>
         <entry key="..\:/Users/User/Desktop/Projekt(android)/app/src/main/res/layout/activity_login.xml" value="0.28804347826086957" />
         <entry key="..\:/Users/User/Desktop/Projekt(android)/app/src/main/res/layout/activity_main.xml" value="0.28804347826086957" />
+        <entry key="..\:/Users/User/Desktop/Projekt(android)/app/src/main/res/layout/activity_profile.xml" value="0.2617753623188406" />
         <entry key="..\:/Users/User/Desktop/Projekt(android)/app/src/main/res/layout/activity_register.xml" value="0.28804347826086957" />
+        <entry key="..\:/Users/User/Desktop/Projekt(android)/app/src/main/res/layout/items_list_item.xml" value="0.2753623188405797" />
+        <entry key="..\:/Users/User/Desktop/Projekt(android)/app/src/main/res/layout/navigation_header.xml" value="0.2617753623188406" />
+        <entry key="..\:/Users/User/Desktop/Projekt(android)/app/src/main/res/menu/menu_items.xml" value="0.309375" />
       </map>
     </option>
   </component>

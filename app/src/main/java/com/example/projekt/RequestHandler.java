@@ -11,10 +11,23 @@ public class RequestHandler {
         HttpURLConnection conn = setupConnection(url);
         return getResponse(conn);
     }
+    public static Response getWithAuth(String url, String token) throws IOException{
+        HttpURLConnection conn = setupConnection(url);
+        String authHeaderValue = "Bearer " +  token;
+        conn.setRequestProperty("Authorization",  authHeaderValue);
+        return getResponse(conn);
+    }
     public static Response post(String url, String data) throws IOException {
         HttpURLConnection conn = setupConnection(url);
         conn.setRequestMethod("POST");
         addRequestBody(conn, data);
+        return getResponse(conn);
+    }
+    public static Response logOutPost(String url, String token) throws IOException {
+        HttpURLConnection conn = setupConnection(url);
+        conn.setRequestMethod("POST");
+        String authHeaderValue = "Bearer " +  token;
+        conn.setRequestProperty("Authorization", authHeaderValue);
         return getResponse(conn);
     }
     public static Response put(String url, String data) throws IOException {
