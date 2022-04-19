@@ -30,6 +30,14 @@ public class RequestHandler {
         conn.setRequestProperty("Authorization", authHeaderValue);
         return getResponse(conn);
     }
+    public static Response postWithAuth(String url, String data, String token) throws IOException {
+        HttpURLConnection conn = setupConnection(url);
+        conn.setRequestMethod("POST");
+        String authHeaderValue = "Bearer " +  token;
+        conn.setRequestProperty("Authorization", authHeaderValue);
+        addRequestBody(conn, data);
+        return getResponse(conn);
+    }
     public static Response put(String url, String data) throws IOException {
         HttpURLConnection conn = setupConnection(url);
         conn.setRequestMethod("PUT");

@@ -12,6 +12,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -26,6 +27,7 @@ import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.projekt.databinding.ActivityMainBinding;
@@ -52,6 +54,10 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     FrameLayout frameLayout;
 
+    Item actual;
+
+    SharedPreferences prefs;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,10 +68,11 @@ public class MainActivity extends AppCompatActivity {
         toolbar = binding.toolbar;
         navigationView = binding.navigationView;
         frameLayout = binding.fragmentContainer;
-
+        prefs = MainActivity.this.getSharedPreferences("preferences", Context.MODE_PRIVATE);
 
         RequestTask task = new RequestTask();
         task.execute();
+
 
         setSupportActionBar(toolbar);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
@@ -106,15 +113,46 @@ public class MainActivity extends AppCompatActivity {
         @NonNull
         @Override
         public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+            RequestTask2 task2 = new RequestTask2();
             ItemsListItemBinding listItemBinding = ItemsListItemBinding.inflate(getLayoutInflater());
-            Item actual = items.get(position);
+            actual = items.get(position);
             listItemBinding.name.setText(actual.getName());
             listItemBinding.price.setText(String.format(" %d", actual.getPrice()));
             listItemBinding.imgView.setImageURI(Uri.parse(String.format(" %d", actual.getImage())));
+            listItemBinding.btnBuy.setOnClickListener(v -> {
+                    task2.execute();
+            });
             return listItemBinding.getRoot().getRootView();
+
         }
     }
 
+    private class RequestTask2 extends  AsyncTask<Void, Void, Response> {
+
+        @Override
+        protected Response doInBackground(Void... voids) {
+            Response response = null;
+            String data = String.format("[\"{\"item_id\":\"%s\",\"quantity\":\"%s\"}\"]", actual.getIdAsString(), "1");
+            Log.e("OrderRequest", "doInBackground: " + data );
+            try {
+                response = RequestHandler.postWithAuth(
+                        "http://192.168.1.45:8000/api/orders/new",
+                        data,
+                        prefs.getString("token", null)
+                );
+            } catch (IOException e) {
+                Log.d("Hiba", e.toString());
+            }
+            return response;
+        }
+
+        @Override
+        protected void onPostExecute(Response response) {
+            super.onPostExecute(response);
+            Toast.makeText(getApplicationContext(), "Order sent", Toast.LENGTH_SHORT).show();
+            Log.e("OrderResponsedCode", "onPostExecute: " + response.getResponseCode() );
+        }
+    }
 
     private class RequestTask  extends AsyncTask<Void, Void, Response> {
 
