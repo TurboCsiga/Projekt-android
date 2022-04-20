@@ -42,13 +42,13 @@ public class RegisterActivity extends AppCompatActivity {
                 password = inputPassword.getText().toString();
                 password2 = inputPassword2.getText().toString();
                 if(username.isEmpty() || username.length() < 5 || username.length() > 20) {
-                    Toast.makeText(RegisterActivity.this, "The username can be a minimum of 5 and a maximum of 20 characters", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "The username need to be a minimum of 5 and a maximum of 20 characters", Toast.LENGTH_SHORT).show();
                 }
                 else if(email.isEmpty() || email.length()  > 255) {
                     Toast.makeText(RegisterActivity.this, "Email cannot be empty", Toast.LENGTH_SHORT).show();
                 }
                 else if(password.isEmpty() || password.length() < 8) {
-                    Toast.makeText(RegisterActivity.this, "The password can be at least 8 characters long", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "The password need to be at least 8 characters long", Toast.LENGTH_SHORT).show();
                 }
                 else if(!password2.equals(password)) {
                     Toast.makeText(RegisterActivity.this, "The password must match", Toast.LENGTH_SHORT).show();
@@ -94,7 +94,7 @@ public class RegisterActivity extends AppCompatActivity {
                 Toast.makeText(RegisterActivity.this, "An error occurred during registration", Toast.LENGTH_SHORT).show();
             }
             else {
-                Toast.makeText(RegisterActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this, "Register successful", Toast.LENGTH_SHORT).show();
             }
             Intent backToMainIntent = new Intent(RegisterActivity.this, MainActivity.class);
             startActivity(backToMainIntent);

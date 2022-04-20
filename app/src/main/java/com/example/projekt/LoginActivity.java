@@ -101,7 +101,6 @@ public class LoginActivity extends AppCompatActivity {
                 try {
                     Gson gson = new Gson();
                     UserResponse userResponse = gson.fromJson(response.getContent(), UserResponse.class);
-                    Log.e("USerResponse", "onPostExecute: " + userResponse.toString());
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("token", userResponse.getToken());
                     editor.apply();
