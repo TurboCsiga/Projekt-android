@@ -88,8 +88,6 @@ public class RegisterActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Response response) {
             super.onPostExecute(response);
-            Log.e("RegisterResponseCode", "onPostExecute: " + response.getResponseCode());
-            Log.e("RegisterResponseCode", "onPostExecute: " + response.getContent());
             if (response == null || response.getResponseCode() >= 400){
                 Toast.makeText(RegisterActivity.this, "An error occurred during registration", Toast.LENGTH_SHORT).show();
             }
