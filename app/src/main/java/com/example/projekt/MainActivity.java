@@ -132,7 +132,6 @@ public class MainActivity extends AppCompatActivity {
         protected Response doInBackground(Void... voids) {
             Response response = null;
             String data = String.format("[{\"item_id\":\"%s\",\"quantity\":\"%s\"}]", actual.getIdAsString(), "1");
-            Log.e("OrderRequest", "doInBackground: " + data );
             try {
                 response = RequestHandler.postWithAuth(
                         "http://192.168.1.45:8000/api/orders/new",
